@@ -36,6 +36,11 @@ const MainRoutes = {
             component: () => import('@/views/dashboards/history/history.vue')
         },
         {
+            name: 'OrderHistory',
+            path: '/orderHistory',
+            component: () => import('@/views/dashboards/orderHistory/orderHistory.vue')
+        },
+        {
             name: 'Store',
             path: '/store',
             component: () => import('@/views/dashboards/store/store.vue')
@@ -43,19 +48,18 @@ const MainRoutes = {
         {
             name: 'StoreDetail',
             path: '/store/:id',
-            component: () => import('@/views/dashboards/menu/menu.vue'),
-
+            component: () => import('@/views/dashboards/menu/menu.vue')
         },
         {
             name: 'MenuDetail',
             path: '/store/:id/:menuId',
-            component: () => import('@/views/dashboards/option-menu/option-menu.vue'),
-        }     ,
+            component: () => import('@/views/dashboards/option-menu/option-menu.vue')
+        },
         {
             name: 'Notice',
             path: '/notice',
-            component: () => import('@/views/dashboards/notice/notice.vue'),
-        }     
+            component: () => import('@/views/dashboards/notice/notice.vue')
+        }
         // {
         //     name: 'Chats',
         //     path: '/apps/chats',
