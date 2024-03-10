@@ -4,6 +4,7 @@ import { useOrderHistoryStore } from '@/stores/order-history';
 import Currency from '@/utils/formatCurrency';
 import { sortBy, sortByDate } from '@/utils/sortTable';
 import moment from 'moment';
+import type { IOrderCurrentMenu } from '@/types/apiTypes';
 
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -11,7 +12,7 @@ import { TrashIcon } from 'vue-tabler-icons';
 const orderHistoryStore = useOrderHistoryStore();
 
 const parentProps = defineProps(['products', 'limit', 'currentPage']);
-const emit = defineEmits(['setPage', 'setLimit']);
+const emit = defineEmits(['to', 'setPage', 'setLimit']);
 
 const headers = [
     { text: '히스토리 Id', value: 'orderHistoryId', sortable: true },
@@ -20,7 +21,7 @@ const headers = [
     { text: '주문가격', value: 'orderPrice' },
     { text: '주문현황', value: 'orderStatus' },
 
-    // there is no order memo for now
+    // there is no order memo for no
     // { text: '메노 주문', value: 'orderMeno' },
     { text: '날짜', value: 'timeStamp' }
 ];
@@ -61,9 +62,15 @@ watch(
         serverOptions.value.page = parentProps.currentPage;
     }
 );
+
+function clickRow(val: IOrderCurrentMenu) {
+    emit('to', val);
+    console.log('you clicked f#ckker');
+}
 </script>
 <template>
     <EasyDataTable
+        @clickRow="clickRow"
         :headers="headers"
         :loading="orderHistoryStore.isLoading"
         :items="sortedData"

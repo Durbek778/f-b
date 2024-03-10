@@ -10,6 +10,8 @@ import moment from 'moment';
 import { useOrderHistoryStore, type IOrdHistoriesParam } from '@/stores/order-history';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import type { IOrderCurrentMenu } from '@/types/apiTypes';
+
 const page = ref({ title: '주문 내역' });
 const breadcrumbs = ref([
     {
@@ -92,6 +94,10 @@ watch(
         currentPage.value = 1;
     }
 );
+function toOrderDetail(store: IOrderCurrentMenu) {
+    // contunue from here
+}
+
 onMounted(search);
 </script>
 
@@ -126,7 +132,7 @@ onMounted(search);
             </div>
         </v-col>
         <v-col cols="12">
-            <Events @set-page="setPage" @set-limit="setLimit" :current-page="currentPage" :limit="listLimit"></Events>
+            <Events @set-page="setPage" @set-limit="setLimit" @to="toOrderDetail" :current-page="currentPage" :limit="listLimit"></Events>
         </v-col>
     </v-row>
 </template>

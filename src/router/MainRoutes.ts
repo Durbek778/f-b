@@ -41,6 +41,11 @@ const MainRoutes = {
             component: () => import('@/views/dashboards/orderHistory/orderHistory.vue')
         },
         {
+            name: 'OrderHistoryDetail',
+            path: '/orderHistory/:id',
+            component: () => import('@/views/dashboards/orderHistory/detailedEvent.vue')
+        },
+        {
             name: 'Store',
             path: '/store',
             component: () => import('@/views/dashboards/store/store.vue')

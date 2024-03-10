@@ -57,7 +57,7 @@ interface IOptionMenu {
     updatedAt?: string;
 }
 interface INotice {
-    storeId?:number,
+    storeId?: number;
     noticeId?: number;
     noticeTitle: string;
     noticeContent: string;
@@ -160,5 +160,6 @@ export type {
     IHistory,
     IResponse,
     IPagination,
-    IResponseItem
+    IResponseItem,
+    IOrderCurrentMenu
 };

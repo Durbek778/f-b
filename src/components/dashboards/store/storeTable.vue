@@ -8,7 +8,7 @@ import type { IStore } from '@/types/apiTypes';
 import { useStoreStore } from '@/stores/store';
 import store from '@/views/dashboards/store/store.vue';
 
-const storeStore = useStoreStore()
+const storeStore = useStoreStore();
 const emit = defineEmits(['to', 'edit', 'delete', 'setPage', 'setLimit']);
 const parentProps = defineProps(['list', 'limit', 'currentPage']);
 //PAGINATION
@@ -19,7 +19,7 @@ const route = useRoute();
 function check() {
     return confirm('이 사용자를 삭제하시겠습니까?');
 }
-const headers:any = [
+const headers: any = [
     { text: '매장 ID', value: 'storeId' },
     { text: '매장 이름', value: 'storeName' },
     { text: '가입날짜', value: 'createdAt' },
@@ -58,6 +58,7 @@ watch(
 );
 function clickRow(val: IStore) {
     emit('to', val);
+    console.log('you clicked f#ckker');
 }
 </script>
 <template>
@@ -74,8 +75,6 @@ function clickRow(val: IStore) {
         v-model:server-options="serverOptions"
         :server-items-length="storeStore.count"
     >
-      
-     
         <template #item-change="data">
             <div class="d-flex align-center">
                 <v-tooltip text="편집">
@@ -102,7 +101,6 @@ function clickRow(val: IStore) {
             <h1>데이터가 없습니다.</h1>
         </template>
     </EasyDataTable>
-  
 </template>
 <style scoped lang="scss">
 .customize-table {

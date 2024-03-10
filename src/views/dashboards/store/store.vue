@@ -33,7 +33,7 @@ let selectedStore = ref<IStore>({
     storeName: '',
     storeAddress: '',
     storePhoneNumber: '',
-    storeMemo:""
+    storeMemo: ''
 });
 const route = useRoute();
 const listLimit = ref(10);
@@ -41,10 +41,9 @@ const currentPage = ref(route.query.page ? Number(route.query.page) : 1);
 
 const getStores = () => {
     storeStore.getStores({
-            limit: listLimit.value,
-            offset: offset.value
-        });
-
+        limit: listLimit.value,
+        offset: offset.value
+    });
 };
 
 const setPage = (page: number) => {
@@ -133,10 +132,10 @@ function toStoreDetail(store: IStore) {
 
     <v-row>
         <v-col cols="12" lg="12" md="12" class="d-flex gap-4">
-       <v-btn-group class="mr-0 ml-auto">
-        <v-btn class="h-100" color="secondary" variant="tonal" @click="handleAddDialog('OPEN')">매장 추가</v-btn>
-        <v-btn class="h-100" color="primary" variant="tonal" @click="getStores">검색</v-btn>
-       </v-btn-group>
+            <v-btn-group class="mr-0 ml-auto">
+                <v-btn class="h-100" color="secondary" variant="tonal" @click="handleAddDialog('OPEN')">매장 추가</v-btn>
+                <v-btn class="h-100" color="primary" variant="tonal" @click="getStores">검색</v-btn>
+            </v-btn-group>
         </v-col>
     </v-row>
     <StoreTable

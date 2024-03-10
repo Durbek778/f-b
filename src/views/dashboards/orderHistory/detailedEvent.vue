@@ -18,7 +18,7 @@ import { useStoreStore } from '@/stores/store';
 import { useRoute } from 'vue-router';
 //states
 
-const page = ref({ title: '메뉴' });
+const page = ref({ title: '메뉴 datailed' });
 const breadcrumbs = ref([
     {
         text: 'Dashboard',
@@ -31,7 +31,7 @@ const breadcrumbs = ref([
         to: '/store'
     },
     {
-        text: '메뉴',
+        text: '메뉴 ',
         disabled: true,
         href: '#'
     }
@@ -156,6 +156,8 @@ function save(modalName: 'ADD' | 'EDIT') {
         :is-loading="menuStore.isLoading"
         :count="menuStore.count"
         :current-page="currentPage"
+        :show-btn="true"
+        message=""
     ></Pagination2>
 </template>
 <style scoped lang="scss"></style>
