@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import 'v-calendar/dist/style.css';
 import BaseBreadcrumb from '@/components/shared/BaseBreadcrumb.vue';
 import { watch, computed } from 'vue';
-import MenuCard from '@/components/dashboards/menu/menu_card.vue';
+import HistoryDtlCard from '@/components/dashboards/menu/order_history_dtl.vue';
 import AddModal from '@/components/dashboards/menu/addModal.vue';
 // import IssueModal from '@/components/dashboards/promotion/issueModal.vue';
 // import EditCondition from '@/components/dashboards/promotion/editCondition.vue';
@@ -18,7 +18,7 @@ import { useStoreStore } from '@/stores/store';
 import { useRoute } from 'vue-router';
 //states
 
-const page = ref({ title: '메뉴 datailed' });
+const page = ref({ title: '발주이력' });
 const breadcrumbs = ref([
     {
         text: 'Dashboard',
@@ -26,12 +26,12 @@ const breadcrumbs = ref([
         to: '/'
     },
     {
-        text: '매장',
+        text: '주문 내역',
         disabled: false,
         to: '/store'
     },
     {
-        text: '메뉴 ',
+        text: '주문 내역 ',
         disabled: true,
         href: '#'
     }
@@ -129,13 +129,8 @@ function save(modalName: 'ADD' | 'EDIT') {
         form-title="메뉴 추가"
     ></AddModal>
 
-    <EditModal
-        @save="save"
-        :is-open="editModalOpen"
-        @handle-modal="handleModals"
-        form-title="메뉴 편집"
-        :menu="selectedMenu as IMenu"
-    ></EditModal>
+    <EditModal @save="save" :is-open="editModalOpen" @handle-modal="handleModals" form-title="메뉴 편집" :menu="selectedMenu as IMenu">
+    </EditModal>
 
     <v-row>
         <v-col cols="12" class="d-flex">
@@ -145,7 +140,7 @@ function save(modalName: 'ADD' | 'EDIT') {
             </v-btn-group>
         </v-col>
         <v-col v-if="menuStore.count > 0" cols="12" sm="6" md="6" lg="3" xl="3" class="h-100" v-for="menu in menuStore.menus">
-            <MenuCard @delete="deletePromotion" @handle-modal="handleModals" :menu="menu"></MenuCard>
+            <HistoryDtlCard @delete="deletePromotion" @handle-modal="handleModals" :menu="menu"></HistoryDtlCard>
         </v-col>
     </v-row>
     <Pagination2

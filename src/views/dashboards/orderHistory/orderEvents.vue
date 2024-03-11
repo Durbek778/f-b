@@ -4,7 +4,7 @@ import { useOrderHistoryStore } from '@/stores/order-history';
 import Currency from '@/utils/formatCurrency';
 import { sortBy, sortByDate } from '@/utils/sortTable';
 import moment from 'moment';
-import type { IOrderCurrentMenu } from '@/types/apiTypes';
+import type { IOrderCurrentMenu, IOrderHistory } from '@/types/apiTypes';
 
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -63,9 +63,9 @@ watch(
     }
 );
 
-function clickRow(val: IOrderCurrentMenu) {
+function clickRow(val: IOrderHistory) {
     emit('to', val);
-    console.log('you clicked f#ckker');
+    console.log('you clicked f#cker');
 }
 </script>
 <template>

@@ -58,6 +58,8 @@ const setLimit = (limit: number) => {
     listLimit.value = limit;
     getStores();
 };
+
+// here
 const filteredList = computed<IStore[]>(() => {
     return storeStore.stores.filter((store: IStore) => {
         return store;
@@ -75,6 +77,7 @@ function editUserFromTable(item: IStore) {
 
     handleEditDialog('OPEN');
 }
+
 function deleteUser(item: IStore) {
     if (storeStore.stores.length == 1) {
         storeStore.deleteStore(Number(item.storeId)).then((res) => {

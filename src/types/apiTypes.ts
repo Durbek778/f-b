@@ -105,7 +105,7 @@ interface IOrderCurrent {
 
 interface IOrderHistory {
     storeId: number;
-    orderId: number;
+    orderHistoryId: number;
     orderStatus: number;
     orderPrice: number;
     orderDay: string;

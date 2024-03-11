@@ -10,7 +10,7 @@ import moment from 'moment';
 import { useOrderHistoryStore, type IOrdHistoriesParam } from '@/stores/order-history';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import type { IOrderCurrentMenu } from '@/types/apiTypes';
+import type { IOrderCurrentMenu, IOrderHistory } from '@/types/apiTypes';
 
 const page = ref({ title: '주문 내역' });
 const breadcrumbs = ref([
@@ -25,6 +25,19 @@ const breadcrumbs = ref([
         href: '#'
     }
 ]);
+
+// let selectedOrder = ref<IOrderCurrentMenu>({
+//     menuId: 0,
+//     menuCategory: '',
+//     menuName: '',
+//     menuDiscountPrice: 0,
+//     menuPrice: 0,
+//     menuTotalPrice: 0,
+//     menuImgUrl: '',
+//     menuMemo: '',
+//     option: []
+// });
+
 const router = useRouter();
 const orderHistoryStore = useOrderHistoryStore();
 const listLimit = ref(10);
@@ -42,10 +55,6 @@ const dateRange = ref({
     start: '',
     end: ''
 });
-const selectUser = (user: any) => {
-    selectedUser.value = user.userId;
-    handleModals('CLOSE', 'USER');
-};
 
 const handleModals = (action: 'OPEN' | 'CLOSE' = 'CLOSE', modalName: 'USER' | 'DATE', data?: any) => {
     console.log(action);
@@ -78,6 +87,7 @@ const setLimit = (limit: number) => {
     listLimit.value = limit;
     search();
 };
+
 const params = computed(() => {
     const params: IOrdHistoriesParam = {
         offset: 0,
@@ -94,8 +104,8 @@ watch(
         currentPage.value = 1;
     }
 );
-function toOrderDetail(store: IOrderCurrentMenu) {
-    // contunue from here
+function toOrderDetail(orderHistory: IOrderHistory) {
+    router.push(`/orderHistory/${orderHistory.orderHistoryId}`);
 }
 
 onMounted(search);
@@ -103,7 +113,7 @@ onMounted(search);
 
 <template>
     <BaseBreadcrumb :title="page.title" :breadcrumbs="breadcrumbs"></BaseBreadcrumb>
-    <UserSelectionModal @select-user="selectUser" @handle-modal="handleModals" :isOpen="userSelectionModalOpen"></UserSelectionModal>
+
     <DateSelectionModal
         @select-date="selectRangeDate"
         :range="dateRange"
@@ -118,8 +128,6 @@ onMounted(search);
                     <v-select clearable :items="[selectedUser]" v-model="selectedUser" hide-details></v-select
                 ></template>
                 <v-btn-group class="ml-0">
-                    <v-btn color="secondary" variant="tonal" class="h-100 py-3" @click="handleModals('OPEN', 'USER')">사용자선택</v-btn>
-
                     <v-btn color="primary" variant="tonal" class="h-100 py-3" @click="handleModals('OPEN', 'DATE')">
                         <template v-if="!selectedRangeDate"> 날짜 선택 </template>
                         <template v-else>
